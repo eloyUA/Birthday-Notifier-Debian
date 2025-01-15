@@ -11,10 +11,14 @@ The birthday notifier can add birthdays of the list (name and date of birth), re
 #### 2.1 Intallation with debian package
 In releases there are some file, the debian package is birthday-notifier.deb and the other files are extra information about .deb and the source code.
 First, you dowload birthday-notifier.deb and then you install debian package with dpkg:
-```dpkg -i birthday-notifier.deb```
+```
+dpkg -i birthday-notifier.deb
+```
+
 If you haven't installed the dependences, you have install them with apt (and then write the previus). For example, if you haven't libnotify-bin:
 ```sudo apt install libnotify-bin```
 Finally, the birthday-notifier will installed. You can verify write:
+
 ```birthday-notifier --version```
 
 #### 2.2 Installation with debian pakage (creating .deb from source code)
