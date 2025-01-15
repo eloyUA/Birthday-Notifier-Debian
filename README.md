@@ -3,6 +3,9 @@ Birthday notifier for Debian based distributions
 ## Table of Contents
 1. [General information](#general-information)
 2. [Installation](#installation)
+  2.1 [Installation with debian package](#installation-with-debian-package)
+  2.2 [Install with debian package (creating .deb)](#installation-with-debian-package-(creating-.deb-from-source-code))
+  2.3 [Installation manual](#installation-manual)
 
 ### 1. General information
 The birthday notifier can add birthdays of the list (name and date of birth), remove birthdays of the list, show the list and enable or disable the notifies.
@@ -19,12 +22,13 @@ If you haven't installed the dependences, you have install them with apt (and th
 ```
 sudo apt install libnotify-bin
 ```
-Finally, the birthday-notifier will installed. You can verify write:
+Finally, the birthday-notifier will installed. You can verify it write:
 ```
 birthday-notifier --version
 ```
 
-#### 2.2 Installation with debian pakage (creating .deb from source code)
+
+#### 2.2 Installation with debian package (creating .deb from source code)
 First, you clone this repository and change of directory:
 ```
 git clone https://github.com/eloyUA/Birthday-Notifier-Debian
@@ -39,6 +43,7 @@ Finally, you creat the debian package:
 dpkg-buildpackage -us -uc
 ```
 The debian package will into ../ (2.1 Install with debian package)
+
 
 #### 2.3 Installation manual
 First, you clone this repository and change of directory:
@@ -57,7 +62,7 @@ gcc src/birthday-notifier.c src/date.o -o src/birthday-notifier
 ```
 Finally, you move src/birthday-notifier and src/README:
 ```
-mv src/birthday-notifier /usr/bin
-mkdir -p /usr/share/doc/birthday-notifier
-mv src/README /usr/share/doc/birthday-notifier
+sudo mv src/birthday-notifier /usr/bin
+sudo mkdir -p /usr/share/doc/birthday-notifier
+sudo mv src/README /usr/share/doc/birthday-notifier
 ```
