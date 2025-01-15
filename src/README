@@ -1,1 +1,33 @@
+Usage: birthday-notifier <option>
 
+This program saves people with their names and birthdays.
+When it's someone's birthday, the program notifies it.
+
+Options:
+	-a --add <name> <birthday>
+		The person with name "name" and birthday "birthday" is added to the list.
+	-r --remove <name>
+		The person with name "name" is deleted of the list.
+	-l --list
+		A list is displayed with the names and dates of birth of the people.
+	-e --enable
+		When Linux starts, "birthday-notifier --check" is executed.
+	-d --disable
+		When Linux start, "birthday-notifier --check" isn't executed.
+	-s --status
+		The status is shown. For example, if birthday-notifer is enabled, the screen
+		will show enabled.
+	-c --check
+		The program checks if today is someone's birthday.
+	-v --version
+		Print the version.
+	-h --help
+		Print this messagge.
+
+Arguments:
+	<name> The name cannot be too long.
+	<birthday> It is a date with format "day/month/year"
+
+Examples:
+	birthday-notifier --add AntonioBanderas 10/8/1960
+	birthday-notifier --remove AntonioBanderas
