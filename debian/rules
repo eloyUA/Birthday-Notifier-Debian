@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+
+override_dh_clean:
+	dh_clean
+
+override_dh_auto_build:
+	gcc -c src/date.c -o src/date.o
+	gcc src/birthday-notifier.c src/date.o -o src/birthday-notifier

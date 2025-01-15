@@ -1,1 +1,15 @@
+Source: birthday-notifier
+Section: misc
+Priority: optional
+Maintainer: Eloy Urriens <eurriens@gmail.com>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13), gcc, make
+Standards-Version: 4.6.2
 
+Package: birthday-notifier
+Architecture: all
+Depends:
+ ${misc:Depends},
+ libnotify-bin (>=0.8.1)
+Description: It is a birthday notifier.
