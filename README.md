@@ -4,12 +4,12 @@ Birthday notifier for Debian based distributions
 1. [General information](#general-information)
 2. [Installation](#installation)
 
-### 1. General information
+### General information
 The birthday notifier can add birthdays of the list (name and date of birth), remove birthdays of the list, show the list and enable or disable the notifies.
 
 
-### 2. Installation
-#### 2.1 Intallation with debian package
+### Installation
+#### Intallation with debian package
 In releases there are some file, the debian package is birthday-notifier.deb and the other files are extra information about .deb and the source code.
 First, you dowload birthday-notifier.deb and then you install debian package with dpkg:
 ```
@@ -25,7 +25,7 @@ birthday-notifier --version
 ```
 
 
-#### 2.2 Installation with debian package (creating .deb from source code)
+#### Installation with debian package (creating .deb from source code)
 First, you clone this repository and change of directory:
 ```
 git clone https://github.com/eloyUA/Birthday-Notifier-Debian
@@ -42,7 +42,7 @@ dpkg-buildpackage -us -uc
 The debian package will into ../ (2.1 Install with debian package)
 
 
-#### 2.3 Installation manual
+#### Installation manual
 First, you clone this repository and change of directory:
 ```
 git clone https://github.com/eloyUA/Birthday-Notifier-Debian
