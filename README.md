@@ -1,8 +1,8 @@
 # Birthday-Notifier-Debian
 Birthday notifier for Debian based distributions
 ## Table of Contents
-1. [General information](###general-information)
-2. [Installation](###installation)
+1. [General information](#general-information)
+2. [Installation](#installation)
 
 ### 1. General information
 The birthday notifier can add birthdays of the list (name and date of birth), remove birthdays of the list, show the list and enable or disable the notifies.
