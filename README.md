@@ -1,65 +1,70 @@
 # Birthday-Notifier-Debian
-Birthday notifier for Debian based distributions
+Birthday Notifier for Debian-based distributions.
+
 ## Table of Contents
-1. [General information](#general-information)
+1. [General Information](#general-information)
 2. [Installation](#installation)
 
-### General information
-The birthday notifier can add birthdays of the list (name and date of birth), remove birthdays of the list, show the list and enable or disable the notifies.
-
+### General Information
+The Birthday Notifier allows you to:
+- Add birthdays to a list (name and date of birth).
+- Remove birthdays from the list.
+- Display the list of birthdays.
+- Enable or disable notifications.
 
 ### Installation
-#### Intallation with debian package
-In releases there are some file, the debian package is birthday-notifier.deb and the other files are extra information about .deb and the source code.
-First, you dowload birthday-notifier.deb and then you install debian package with dpkg:
-```
-dpkg -i birthday-notifier.deb
-```
-If you haven't installed the dependences, you have install them with apt (and then write the previus). For example, if you haven't libnotify-bin:
-```
-sudo apt install libnotify-bin
-```
-Finally, the birthday-notifier will installed. You can verify it write:
-```
-birthday-notifier --version
-```
 
+#### Installation with Debian Package
+In the [Releases](https://github.com/eloyUA/Birthday-Notifier-Debian/releases) section, you will find several files. The `.deb` package is named `birthday-notifier.deb`, while the other files provide additional information or source code.
 
-#### Installation with debian package (creating .deb from source code)
-First, you clone this repository and change of directory:
-```
-git clone https://github.com/eloyUA/Birthday-Notifier-Debian
-cd Birthday-Notifier-Debian
-```
-Now, if you haven't debhelper, install it.
-```
-sudo apt install debhelper
-```
-Finally, you creat the debian package:
-```
-dpkg-buildpackage -us -uc
-```
-The debian package will into ../ (2.1 Install with debian package)
+1. Download the `birthday-notifier.deb` file.
+2. Install the Debian package using `dpkg`:
+   ```
+   sudo dpkg -i birthday-notifier.deb
+   ```
+3. If dependencies are missing, install them using `apt` (and then retry the `dpkg` command). For example, if `libnotify-bin` is not installed:
+   ```
+   sudo apt install libnotify-bin
+   ```
+4. Verify the installation by checking the version:
+   ```
+   birthday-notifier --version
+   ```
 
+#### Installation by creating the debian package from source code
+1. Clone the repository and navigate to the project directory:
+   ```
+   git clone https://github.com/eloyUA/Birthday-Notifier-Debian
+   cd Birthday-Notifier-Debian
+   ```
+2. Ensure that `debhelper` is installed:
+   ```
+   sudo apt install debhelper
+   ```
+3. Build the debian package:
+   ```
+   dpkg-buildpackage -us -uc
+   ```
+4. The `.deb` package will be generated in the parent directory (`../`). Follow the steps in the [Installation with Debian Package](#installation-with-debian-package) section to install it.
 
-#### Installation manual
-First, you clone this repository and change of directory:
-```
-git clone https://github.com/eloyUA/Birthday-Notifier-Debian
-cd Birthday-Notifier-Debian
-```
-Then, if you haven't gcc, intall it.
-```
-sudo apt install gcc
-```
-You compile the project:
-```
-gcc -c src/date.c -o src/date.o
-gcc src/birthday-notifier.c src/date.o -o src/birthday-notifier
-```
-Finally, you move src/birthday-notifier and src/README:
-```
-sudo mv src/birthday-notifier /usr/bin
-sudo mkdir -p /usr/share/doc/birthday-notifier
-sudo mv src/README /usr/share/doc/birthday-notifier
-```
+#### Manual Installation
+1. Clone the repository and navigate to the project directory:
+   ```
+   git clone https://github.com/eloyUA/Birthday-Notifier-Debian
+   cd Birthday-Notifier-Debian
+   ```
+2. Ensure that `gcc` is installed:
+   ```
+   sudo apt install gcc
+   ```
+3. Compile the project:
+   ```
+   gcc -c src/date.c -o src/date.o
+   gcc src/birthday-notifier.c src/date.o -o src/birthday-notifier
+   ```
+4. Move the compiled binary and documentation to their appropriate locations:
+   ```
+   sudo mv src/birthday-notifier /usr/bin
+   sudo mkdir -p /usr/share/doc/birthday-notifier
+   sudo mv src/README /usr/share/doc/birthday-notifier
+   ```
