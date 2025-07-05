@@ -44,12 +44,6 @@ bool isTheFuture(char day, char month, short year) {
 		return false;
 }
 
-/**
- * FUNCTION: formatStringDateToNumberDate
- * INPUT: A string.
- * REQUIREMENTS: The string must be "day/month/year"
- * OUTPUT: The day, month and year
- */
 void formatStingDateToNumberDate(char *stringDate, char *day, char *month, short *year) {
 	char copyDate[MAX_DATE_LENGTH];
 	char *token;
@@ -76,27 +70,34 @@ void formatStingDateToNumberDate(char *stringDate, char *day, char *month, short
  */
 bool validateDate(char *stringDate) {
 	int len = strlen(stringDate);
-	if (len > MAX_DATE_LENGTH || stringDate[0] == '/' || stringDate[len - 1] == '/')
+	if (len > MAX_DATE_LENGTH || stringDate[0] == '/'
+		|| stringDate[len - 1] == '/') {
 		return false;
+	}
 
 	char i = 0;
 	char counter = 0;
-	while (i < len - 1 && (stringDate[i] >= '0' && stringDate[i] <= '9' || stringDate[i] == '/' || counter <= 2)) {
+	while (i < len - 1 && (stringDate[i] >= '0' && stringDate[i] <= '9' 
+			|| stringDate[i] == '/' || counter <= 2)) {
 		if (stringDate[i] == '/')
 			counter++;
 		i++;
 	}
 
-	if (!(stringDate[i] >= '0' && stringDate[i] <= '9' || stringDate[i] == '/') || counter != 2)
+	if (!(stringDate[i] >= '0' && stringDate[i] <= '9' ||
+		stringDate[i] == '/') || counter != 2) {
 		return false;
+	}
 
 	char day;
 	char month;
 	short year;
 
 	formatStingDateToNumberDate(stringDate, &day, &month, &year);
-	if (day <= 0 || day > 31 || month <= 0 || month > 12 || isTheFuture(day, month, year))
-		return false;
+	if (day <= 0 || day > 31 || month <= 0 ||
+		month > 12 || isTheFuture(day, month, year)) {
+			return false;
+	}
 
 	return true;
 }
@@ -124,7 +125,8 @@ short getYear(Date date) {
 }
 
 bool equalsDate(Date date1, Date date2) {
-	return date1.day == date2.day && date1.month == date2.month && date1.year == date2.year;
+	return date1.day == date2.day && date1.month == date2.month && 
+			date1.year == date2.year;
 }
 
 void formatDateToStringDate(char stringDate[MAX_DATE_LENGTH], Date date) {
@@ -159,7 +161,9 @@ int calculateDifferenceInYears(Date date1, Date date2) {
 	int years;
 
 	years = getYear(date2) - getYear(date1);
-	if (getMonth(date1) > getMonth(date2) || (getMonth(date1) == getMonth(date2) && getDay(date1) > getDay(date2)))
-		years--;
+	if (getMonth(date1) > getMonth(date2) ||
+		(getMonth(date1) == getMonth(date2) && getDay(date1) > getDay(date2))) {
+			years--;
+	}
     return years;
 }

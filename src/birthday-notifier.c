@@ -4,7 +4,8 @@
  * VERSION: 1.0.0
  * HISTORICAL: Created by Eloy Urriens Arpal on 1/13/2025
  * DESCRIPTION:
- *		This program saves names of people with their date of birth. When the linux starts, it checks all birthdays and
+ *		This program saves names of people with their date of birth.
+ 		When the linux starts, it checks all birthdays and
  * 		if someone has a birthday today, a notify is sent.
  * 		This program be able to:
  * 			- Add (name) (date of birth)
@@ -29,11 +30,25 @@
 #define VERSION "1.0"
 #define MAX_NAME_LENGTH 64
 #define PATH_HELP_FILE "/usr/share/doc/birthday-notifier/README"
-#define PATH_CONFIG ".config/birthday-notifier" // (/home/nameUsr + this path)
-#define PATH_DATA_FILE ".config/birthday-notifier/birthdays" // The birthdays are saved in this file (/home/nameUsr/ + this path) (this path = PATH_CONFIG + "birthday")
-#define PATH_DATA_FILE_AUX ".config/birthday-notifier/birthdays-aux" // This file is temporary (/home/nameUsr/ + this path) (this path = PATH_CONFIG + "birthday-aux")
-#define PATH_BIRTHDAY_NOTIFIER_DESKTOP ".config/autostart/birthday-notifier.desktop" // When linux starts, this file executes birthday-notifier --check (/home/nameUsr/ + this path)
-#define PATH_BIRTHDAY_NOTIFIER_BIN "/usr/bin/birthday-notifier" // The path of birthday-notifier (bin)
+#define PATH_CONFIG ".config/birthday-notifier"
+#define PATH_DATA_FILE ".config/birthday-notifier/birthdays"
+#define PATH_DATA_FILE_AUX ".config/birthday-notifier/birthdays-aux"
+#define PATH_BIRTHDAY_NOTIFIER_DESKTOP ".config/autostart/birthday-notifier.desktop"
+#define PATH_BIRTHDAY_NOTIFIER_BIN "/usr/bin/birthday-notifier"
+
+/**
+ * PATH_CONFIG: (/home/nameUsr + this path)
+ * PATH_DATA_FILE:
+ * 		The birthdays are saved in this file (/home/nameUsr/ + this path)
+ * 		(this path = PATH_CONFIG + "birthday")
+ * PATH_DATA_FILE_AUX:
+ * 		This file is temporary (/home/nameUsr/ + this path)
+ * 		(this path = PATH_CONFIG + "birthday-aux")
+ * PATH_BIRTHDAY_NOTIFIER_DESKTOP:
+ * 		When linux starts, this file executes birthday-notifier --check
+ * 		(/home/nameUsr/ + this path)
+ * PATH_BIRTHDAY_NOTIFIER_BIN: The path of birthday-notifier (bin)
+ */
 
 /**
  * FUNCTION: errorBirthdayNotifier
@@ -50,9 +65,13 @@ void errorBirthdayNotifier(char *msgError) {
 
 /**
  * FUNCTION: readStringFromFile
- * INPUT: A string, maxLength (the maximum length of the string), until (the reader stop when reads this character) and the pointer to file.
- * REQUIREMENTS: char string[maxLength] (The maxLength must be the maximum length of the string)
- * OUTPUT: The string has everything read up to the variable until. The until isn't included.
+ * INPUT:
+ * 		A string, maxLength (the maximum length of the string),
+ * 		until (the reader stop when reads this character) and the pointer to file.
+ * REQUIREMENTS:
+ * 		char string[maxLength] (The maxLength must be the maximum length of the string)
+ * OUTPUT:
+ * 		The string has everything read up to the variable until. The until isn't included.
  */
 void readStringFromFile(char *string, char maxLength, char until, FILE *f) {
 	char cont = 0;
@@ -275,7 +294,8 @@ void removeBirthday(char **argv) {
 }
 
 bool isCommandRemoveBirthday(int argc, char **argv) {
-	return argc == 3 && (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "--remove") == 0);
+	return argc == 3 && (strcmp(argv[1], "-r") == 0 ||
+						strcmp(argv[1], "--remove") == 0);
 }
 
 /**
@@ -309,7 +329,8 @@ void showListBirthdays() {
 		readDateFromFile(stringDate, f);
 		while (!feof(f)) {
 			date = newDate(stringDate);
-			printf("%d.%s (%s) (%d age)\n", cont + 1, name, stringDate, calculateDifferenceInYears(date, dateNow));
+			printf("%d.%s (%s) (%d age)\n", cont + 1, name,
+					stringDate, calculateDifferenceInYears(date, dateNow));
 
 			cont = cont + 1;
 			readNameFromFile(name, f);
@@ -321,19 +342,25 @@ void showListBirthdays() {
 }
 
 bool isCommandShowListBirthdays(int argc, char **argv) {
-	return argc == 2 && (strcmp(argv[1], "-l") == 0 || strcmp(argv[1], "--list") == 0);
+	return argc == 2 && (strcmp(argv[1], "-l") == 0 ||
+						strcmp(argv[1], "--list") == 0);
 }
 
 /**
  * FUNCTION: enableNotifier
- * OUTPUT: The notifier is enabled so when linux init, the notifier search in birthday file. If there are birthdays are shown.
+ * OUTPUT:
+ * 		The notifier is enabled so when linux init,
+ * 		the notifier search in birthday file.
+ * 		If there are birthdays are shown.
  */
 void enableNotifier() {
 	char txt[512];
 	char command[550];
 	char path_birthday_notifier_desktop[512];
 
-	strcatPathUsrAndOtherPath(path_birthday_notifier_desktop, PATH_BIRTHDAY_NOTIFIER_DESKTOP);
+	strcatPathUsrAndOtherPath(
+		path_birthday_notifier_desktop,
+		PATH_BIRTHDAY_NOTIFIER_DESKTOP);
 
 	strcpy(txt, "[Desktop Entry]\n");
 	strcat(txt, "Type=Application\n");
@@ -354,18 +381,23 @@ void enableNotifier() {
 }
 
 bool isCommandEnableNotifier(int argc, char **argv) {
-	return argc == 2 && (strcmp(argv[1], "-e") == 0 || strcmp(argv[1], "--enable") == 0);
+	return argc == 2 && (strcmp(argv[1], "-e") == 0 ||
+						strcmp(argv[1], "--enable") == 0);
 }
 
 /**
  * FUNCTION: disableNotifier
- * OUTPUT: The notifier is disabled so when linux init, the notifier don't search in birthday file.
+ * OUTPUT:
+ * 		The notifier is disabled so when linux init,
+ * 		the notifier don't search in birthday file.
  */
 void disableNotifier() {
 	char command[128];
 	char path_birthday_notifier_desktop[512];
 
-	strcatPathUsrAndOtherPath(path_birthday_notifier_desktop, PATH_BIRTHDAY_NOTIFIER_DESKTOP);
+	strcatPathUsrAndOtherPath(
+		path_birthday_notifier_desktop,
+		PATH_BIRTHDAY_NOTIFIER_DESKTOP);
 
 	strcpy(command, "rm ");
 	strcat(command, path_birthday_notifier_desktop);
@@ -375,18 +407,24 @@ void disableNotifier() {
 }
 
 bool isCommandDisableNotifier(int argc, char **argv) {
-	return argc == 2 && (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "--disable") == 0);
+	return argc == 2 && (strcmp(argv[1], "-d") == 0 ||
+						strcmp(argv[1], "--disable") == 0);
 }
 
 /**
  * FUNCTION: showStatusNotifier
- * OUTPUT: The status of the notifier is shown. For example, if the notifier is enabled, in the display is shown "enabled".
+ * OUTPUT: 
+ * 		The status of the notifier is shown.
+ * 		For example, if the notifier is enabled, in the display is shown "enabled".
  */
 void showStatusNotifier() {
 	char command[512];
 	char path_birthday_notifier_desktop[512];
 
-	strcatPathUsrAndOtherPath(path_birthday_notifier_desktop, PATH_BIRTHDAY_NOTIFIER_DESKTOP);
+	strcatPathUsrAndOtherPath(
+		path_birthday_notifier_desktop,
+		PATH_BIRTHDAY_NOTIFIER_DESKTOP);
+
 	snprintf(command, sizeof(command), "test -f %s", path_birthday_notifier_desktop);
 	if (system(command) == 0) {
 		printf("The notifier is enabled.\n");
@@ -397,13 +435,16 @@ void showStatusNotifier() {
 }
 
 bool isCommandShowStatusNotifier(int argc, char **argv) {
-	return argc == 2 && (strcmp(argv[1], "-s") == 0 || strcmp(argv[1], "--status") == 0);
+	return argc == 2 && (strcmp(argv[1], "-s") == 0 ||
+						strcmp(argv[1], "--status") == 0);
 }
 
 /**
  * FUNCTION: checkBirthdays
  * REQUIREMENTS: Maximum 16 birthdays in one day.
- * OUTPUT: The notifier search in the birthday file. If there are some birthday todoy is shown.
+ * OUTPUT:
+ * 		The notifier search in the birthday file.
+ * 		If there are some birthday todoy is shown.
  */
 void checkBirthdays() {
 	char path_data_file[512];
@@ -460,7 +501,8 @@ void checkBirthdays() {
 }
 
 bool isCommandCheckBirthdays(int argc, char **argv) {
-	return argc == 2 && (strcmp(argv[1], "-c") == 0 || strcmp(argv[1], "--check") == 0);
+	return argc == 2 && (strcmp(argv[1], "-c") == 0 ||
+						strcmp(argv[1], "--check") == 0);
 }
 
 /**
@@ -480,7 +522,8 @@ void helpOption() {
 }
 
 bool isCommandHelp(int argc, char **argv) {
-	return argc == 2 && (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0);
+	return argc == 2 && (strcmp(argv[1], "-h") == 0 ||
+						strcmp(argv[1], "--help") == 0);
 }
 
 void showVersion() {
@@ -488,7 +531,8 @@ void showVersion() {
 }
 
 bool isCommandShowVersion(int argc, char **argv) {
-	return argc == 2 && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0);
+	return argc == 2 && (strcmp(argv[1], "-v") == 0 || 
+						strcmp(argv[1], "--version") == 0);
 }
 
 int main(int argc, char **argv) {
